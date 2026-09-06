@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173648"><meta name="description" content="Axiom CAD — a local-first, WebGPU-powered mechanical design workbench. Create, edit and export real 3D geometry in your browser.">
+<title>Axiom CAD · Mechanical design, reimagined</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23173648'/%3E%3Cpath d='m24 8 14 8v16l-14 8-14-8V16zm0 16 14-8M24 24 10 16m14 8v16' fill='none' stroke='%237cd3da' stroke-width='2.5'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+<header class="titlebar"><div class="brand"><span id="brand-icon"></span><strong>axiom<span>CAD</span></strong><span class="brand-divider"></span><span class="brand-caption">Mechanical design, reimagined.</span></div><div class="document-title"><span class="save-dot"></span><span id="title-name">Bearing support assembly</span><span class="title-extension">.axiom</span></div><div class="title-actions" id="title-actions"></div></header>
+<nav class="tabbar" aria-label="Workspaces"><button class="file-tab" data-command="file">File</button><div id="workspace-tabs"></div><div class="command-search" role="button" tabindex="0" data-command="search"><span id="search-icon"></span><span>Find a command</span><kbd>⌘ K</kbd></div><button class="user-avatar" data-command="about" title="About Axiom CAD">AC</button></nav>
+<section id="ribbon" class="ribbon" aria-label="Modeling commands"></section>
+<main class="workspace">
+<aside id="pathfinder" class="pathfinder"><div class="panel-tabs"><button class="active" data-tree-tab="model">PathFinder</button><button data-tree-tab="history">History</button><button class="icon-button push-right" data-command="collapse-tree" title="Collapse all"></button></div><div class="tree-search"><span id="tree-search-icon"></span><input id="tree-filter" placeholder="Filter bodies and features…" aria-label="Filter model tree"><kbd>/</kbd></div><div id="tree" class="tree"></div><div class="pathfinder-footer"><span class="local-indicator"></span><span>Local workspace</span><span id="saved-state">Saved</span></div></aside>
+<section class="viewport" id="viewport" aria-label="Interactive 3D modeling viewport">
+<canvas id="scene" tabindex="0" aria-label="3D model. Drag to orbit, middle-drag to pan, scroll to zoom."></canvas><svg id="overlay" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+<div class="viewport-heading"><div class="eyebrow"><span class="live-square"></span><span id="workspace-label">ASSEMBLY</span><span class="crumb-divider">/</span><span id="context-label">DESIGN</span></div><h1 id="viewport-title">Bearing support assembly</h1><div id="viewport-subtitle">Parametric bodies · Local-first workspace</div></div>
+<div class="viewport-top-right"><span class="engine-badge" id="engine-badge"><span></span>Initializing renderer</span><button class="icon-button" data-command="toggle-properties" title="Toggle properties"></button></div>
+<div class="view-cube" id="view-cube"><svg viewBox="0 0 110 114"><g stroke-linejoin="round"><path data-view="top" class="cube-face cube-top" d="M55 8 96 30 55 52 14 30Z"/><path data-view="front" class="cube-face cube-front" d="M14 30 55 52 55 99 14 75Z"/><path data-view="right" class="cube-face cube-right" d="M55 52 96 30 96 75 55 99Z"/></g><g class="cube-label"><text x="55" y="34" data-view="top">TOP</text><text x="35" y="68" transform="rotate(29 35 68)" data-view="front">FRONT</text><text x="75" y="68" transform="rotate(-29 75 68)" data-view="right">RIGHT</text></g></svg><button data-command="iso" class="cube-home" title="Isometric view">Isometric</button></div>
+<div class="viewport-tools" id="viewport-tools"></div>
+<div id="operation-panel" class="operation-panel hidden"></div>
+<div class="empty-state hidden" id="empty-state"><div id="empty-icon"></div><h2>A great design starts here.</h2><p>Create a solid, draw a sketch, or import your model.</p><button class="primary-button" data-command="box">Create your first body</button><button class="text-button" data-command="sample-bearing">Explore the sample assembly</button></div>
+<div class="busy-indicator hidden" id="busy"><span class="spinner"></span><span>Rebuilding geometry…</span></div>
+<div class="viewport-bottom-left"><svg id="triad" viewBox="0 0 90 90"></svg><span id="view-name">Isometric</span></div>
+<div class="viewport-bottom-center"><div class="view-controls" id="view-controls"></div><div class="navigation-hint" id="navigation-hint">Drag to orbit <i>·</i> Middle-drag to pan <i>·</i> Scroll to zoom</div></div>
+<div class="viewport-bottom-right"><div id="scale-bar"><span id="scale-label">50 mm</span><div></div></div><button class="help-button" data-command="help" title="Keyboard shortcuts">?</button></div>
+<div id="hover-label" class="hover-label hidden"></div>
+</section>
+<aside id="properties" class="properties"><div class="properties-header"><span>Design properties</span><button class="icon-button" data-command="toggle-properties" title="Close properties"></button></div><div id="inspector" class="inspector"></div></aside>
+</main>
+<div class="document-tabs"><div class="document-tab active"><span id="doc-tab-icon"></span><span id="doc-tab-name">Bearing support assembly</span><span class="doc-type">Assembly</span></div><button class="icon-button" data-command="new" title="New document"></button><span class="document-tab-spacer"></span><span class="mode-label"><span></span>Parametric modeling</span></div>
+<footer class="statusbar"><span id="status-icon"></span><span id="status-text">Ready</span><span class="status-divider"></span><span id="status-selection">No selection</span><span class="status-spacer"></span><span id="mesh-stats">Generating solids</span><span class="status-divider"></span><span id="submit-stat">—</span><button data-command="units" id="units-button">mm</button><span class="status-separator"></span><button data-command="snap" id="snap-button">Snap 1 mm</button><button data-command="help" id="status-help"></button></footer>
+</div>
+<div id="toast-region" role="status" aria-live="polite"></div>
+<dialog id="modal"><div id="modal-content"></div></dialog>
+<div id="menu" class="popup-menu hidden" role="menu"></div>
+<input type="file" id="file-input" class="hidden" accept=".json,.axiom,.stl,.obj">
+<script type="module" src="src/app.js"></script>
+</body>
+</html>

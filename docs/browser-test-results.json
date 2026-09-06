@@ -1,0 +1,169 @@
+{
+  "backend": "WebGL2",
+  "navigation": "http://127.0.0.1:8080",
+  "tests": [
+    {
+      "name": "sample builds 14 real bodies",
+      "passed": true
+    },
+    {
+      "name": "renderer sleeps without an idle animation loop",
+      "passed": true
+    },
+    {
+      "name": "inspector edits rebuild a solid",
+      "passed": true
+    },
+    {
+      "name": "Undo restores geometric volume",
+      "passed": true
+    },
+    {
+      "name": "Redo restores edited parameter",
+      "passed": true
+    },
+    {
+      "name": "invalid dimension is rejected",
+      "passed": true
+    },
+    {
+      "name": "material selection updates the document and GPU batch",
+      "passed": true
+    },
+    {
+      "name": "ribbon primitive dialog creates real geometry",
+      "passed": true
+    },
+    {
+      "name": "hole dialog cuts actual material",
+      "passed": true
+    },
+    {
+      "name": "hole is retained as an editable feature",
+      "passed": true
+    },
+    {
+      "name": "ray picking selects the rendered body",
+      "passed": true
+    },
+    {
+      "name": "pointer drag moves the body in model space",
+      "passed": true
+    },
+    {
+      "name": "surface picking measures two points",
+      "passed": true
+    },
+    {
+      "name": "measurement result is a finite nonzero distance",
+      "passed": true
+    },
+    {
+      "name": "section generates actual triangle-plane contours",
+      "passed": true
+    },
+    {
+      "name": "exploded view changes GPU instance positions only",
+      "passed": true
+    },
+    {
+      "name": "wireframe changes the rendering mode",
+      "passed": true
+    },
+    {
+      "name": "dark theme switches the UI",
+      "passed": true
+    },
+    {
+      "name": "perspective projection is active",
+      "passed": true
+    },
+    {
+      "name": "rectangle pointer tool creates a closed sketch",
+      "passed": true
+    },
+    {
+      "name": "sketch extrusion produces nonempty geometry",
+      "passed": true
+    },
+    {
+      "name": "sketch dimensions regenerate linked extrusion",
+      "passed": true
+    },
+    {
+      "name": "deleting a sketch freezes its latest profile in the extrusion",
+      "passed": true
+    },
+    {
+      "name": "Undo restores sketch association",
+      "passed": true
+    },
+    {
+      "name": "Boolean union generates the expected volume",
+      "passed": true
+    },
+    {
+      "name": "Boolean operands are retained but hidden",
+      "passed": true
+    },
+    {
+      "name": "Boolean undo restores operands",
+      "passed": true
+    },
+    {
+      "name": "linear pattern produces independent bodies",
+      "passed": true
+    },
+    {
+      "name": "circular pattern produces independent bodies",
+      "passed": true
+    },
+    {
+      "name": "mirror changes geometry across the selected plane",
+      "passed": true
+    },
+    {
+      "name": "isolation changes renderable body visibility",
+      "passed": true
+    },
+    {
+      "name": "show all restores hidden bodies",
+      "passed": true
+    },
+    {
+      "name": "SVG export creates a valid three-view document",
+      "passed": true
+    },
+    {
+      "name": "PNG capture contains an actual raster payload",
+      "passed": true
+    },
+    {
+      "name": "native JSON reload retains geometry",
+      "passed": true
+    },
+    {
+      "name": "OBJ import applies the selected source units",
+      "passed": true
+    },
+    {
+      "name": "command palette filters real commands",
+      "passed": true
+    },
+    {
+      "name": "command palette dispatches a modeling dialog",
+      "passed": true
+    },
+    {
+      "name": "workspace fits a smaller desktop viewport",
+      "passed": true
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "browser": "140.0.7339.16",
+  "passed": 40
+}

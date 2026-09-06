@@ -1,0 +1,230 @@
+
+> axiom-cad@0.1.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: standalone build has valid classic JavaScript and no external runtime assets
+ok 1 - standalone build has valid classic JavaScript and no external runtime assets
+  ---
+  duration_ms: 71.221466
+  type: 'test'
+  ...
+# Subtest: native document serialization preserves editable parameters and features
+ok 2 - native document serialization preserves editable parameters and features
+  ---
+  duration_ms: 6.938511
+  type: 'test'
+  ...
+# Subtest: unsupported schema, duplicate ids and non-finite coordinates are rejected
+ok 3 - unsupported schema, duplicate ids and non-finite coordinates are rejected
+  ---
+  duration_ms: 0.46238
+  type: 'test'
+  ...
+# Subtest: invalid radii, segment counts, scales and profiles are rejected
+ok 4 - invalid radii, segment counts, scales and profiles are rejected
+  ---
+  duration_ms: 0.393431
+  type: 'test'
+  ...
+# Subtest: binary STL has the correct layout and round-trips volume
+ok 5 - binary STL has the correct layout and round-trips volume
+  ---
+  duration_ms: 1.369396
+  type: 'test'
+  ...
+# Subtest: ASCII STL imports facet vertices
+ok 6 - ASCII STL imports facet vertices
+  ---
+  duration_ms: 0.37122
+  type: 'test'
+  ...
+# Subtest: malformed STL and invalid OBJ indices reject
+ok 7 - malformed STL and invalid OBJ indices reject
+  ---
+  duration_ms: 0.66134
+  type: 'test'
+  ...
+# Subtest: OBJ export/import round-trips normals, winding and volume
+ok 8 - OBJ export/import round-trips normals, winding and volume
+  ---
+  duration_ms: 1.315246
+  type: 'test'
+  ...
+# Subtest: OBJ supports negative indices and concave n-gons
+ok 9 - OBJ supports negative indices and concave n-gons
+  ---
+  duration_ms: 0.76882
+  type: 'test'
+  ...
+# Subtest: export rejects empty input
+ok 10 - export rejects empty input
+  ---
+  duration_ms: 0.398241
+  type: 'test'
+  ...
+# Subtest: OBJ n-gon projection tolerates collinear leading vertices
+ok 11 - OBJ n-gon projection tolerates collinear leading vertices
+  ---
+  duration_ms: 1.026088
+  type: 'test'
+  ...
+# Subtest: rectangular solid: analytic volume, area, bounds, 12 technical edges
+ok 12 - rectangular solid: analytic volume, area, bounds, 12 technical edges
+  ---
+  duration_ms: 13.08545
+  type: 'test'
+  ...
+# Subtest: concave extrusion and reversed winding yield the same volume
+ok 13 - concave extrusion and reversed winding yield the same volume
+  ---
+  duration_ms: 6.497431
+  type: 'test'
+  ...
+# Subtest: degenerate and bow-tie profiles are rejected
+ok 14 - degenerate and bow-tie profiles are rejected
+  ---
+  duration_ms: 0.503977
+  type: 'test'
+  ...
+# Subtest: polygon normal tolerates collinear leading vertices
+ok 15 - polygon normal tolerates collinear leading vertices
+  ---
+  duration_ms: 0.2476
+  type: 'test'
+  ...
+# Subtest: cylinder and tube match analytic polygonal volumes
+ok 16 - cylinder and tube match analytic polygonal volumes
+  ---
+  duration_ms: 62.831315
+  type: 'test'
+  ...
+# Subtest: sphere approximates analytic volume within one percent
+ok 17 - sphere approximates analytic volume within one percent
+  ---
+  duration_ms: 110.429686
+  type: 'test'
+  ...
+# Subtest: partial revolutions preserve orientation and volume
+ok 18 - partial revolutions preserve orientation and volume
+  ---
+  duration_ms: 148.267591
+  type: 'test'
+  ...
+# Subtest: BSP union of overlapping cubes
+ok 19 - BSP union of overlapping cubes
+  ---
+  duration_ms: 2.944054
+  type: 'test'
+  ...
+# Subtest: BSP subtract of overlapping cubes
+ok 20 - BSP subtract of overlapping cubes
+  ---
+  duration_ms: 1.531909
+  type: 'test'
+  ...
+# Subtest: BSP intersect of overlapping cubes
+ok 21 - BSP intersect of overlapping cubes
+  ---
+  duration_ms: 1.513083
+  type: 'test'
+  ...
+# Subtest: CSG coplanar interval sweep eliminates false T-junction feature edges
+ok 22 - CSG coplanar interval sweep eliminates false T-junction feature edges
+  ---
+  duration_ms: 1.507943
+  type: 'test'
+  ...
+# Subtest: Boolean dependency snapshots retain operand transformations
+ok 23 - Boolean dependency snapshots retain operand transformations
+  ---
+  duration_ms: 1.441561
+  type: 'test'
+  ...
+# Subtest: negative scale and mirror preserve outward orientation
+ok 24 - negative scale and mirror preserve outward orientation
+  ---
+  duration_ms: 1.294257
+  type: 'test'
+  ...
+# Subtest: open-top shell subtracts the correct cavity
+ok 25 - open-top shell subtracts the correct cavity
+  ---
+  duration_ms: 6.591566
+  type: 'test'
+  ...
+# Subtest: hole subtracts a polygonal cylinder and supports suppression
+ok 26 - hole subtracts a polygonal cylinder and supports suppression
+  ---
+  duration_ms: 59.705451
+  type: 'test'
+  ...
+# Subtest: rounded boxes have lower volume than their bounding box
+ok 27 - rounded boxes have lower volume than their bounding box
+  ---
+  duration_ms: 11.415666
+  type: 'test'
+  ...
+# Subtest: sample assemblies produce finite renderable geometry
+ok 28 - sample assemblies produce finite renderable geometry
+  ---
+  duration_ms: 657.306904
+  type: 'test'
+  ...
+# Subtest: cache cannot retain stale feature parameters
+ok 29 - cache cannot retain stale feature parameters
+  ---
+  duration_ms: 0.723141
+  type: 'test'
+  ...
+# Subtest: matrix inverse: both left and right identity
+ok 30 - matrix inverse: both left and right identity
+  ---
+  duration_ms: 3.290902
+  type: 'test'
+  ...
+# Subtest: singular inverse is rejected
+ok 31 - singular inverse is rejected
+  ---
+  duration_ms: 0.464453
+  type: 'test'
+  ...
+# Subtest: orthographic and perspective rays round-trip projected world points
+ok 32 - orthographic and perspective rays round-trip projected world points
+  ---
+  duration_ms: 1.302432
+  type: 'test'
+  ...
+# Subtest: zoom remains anchored under the cursor
+ok 33 - zoom remains anchored under the cursor
+  ---
+  duration_ms: 2.567463
+  type: 'test'
+  ...
+# Subtest: triangle picking handles both winding orders and misses
+ok 34 - triangle picking handles both winding orders and misses
+  ---
+  duration_ms: 0.406556
+  type: 'test'
+  ...
+# Subtest: parallel-ray AABB rejection
+ok 35 - parallel-ray AABB rejection
+  ---
+  duration_ms: 0.3225
+  type: 'test'
+  ...
+# Subtest: development server serves modules, limits paths and rejects writes
+ok 36 - development server serves modules, limits paths and rejects writes
+  ---
+  duration_ms: 247.656089
+  type: 'test'
+  ...
+1..36
+# tests 36
+# suites 0
+# pass 36
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1197.168979

@@ -1,0 +1,819 @@
+{
+  "schema": "axiom-cad",
+  "version": 1,
+  "name": "Bearing support assembly",
+  "units": "mm",
+  "bodies": [
+    {
+      "id": "4980e62b-d471-4452-8e37-638372f2bdff",
+      "name": "Mounting plate",
+      "kind": "box",
+      "params": {
+        "width": 148,
+        "depth": 96,
+        "height": 12,
+        "radius": 9
+      },
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#b9c7d1",
+      "material": "aluminum",
+      "features": [
+        {
+          "id": "hole--57--31",
+          "type": "hole",
+          "name": "Mounting hole · Ø9",
+          "params": {
+            "radius": 4.5,
+            "depth": 16,
+            "x": -57,
+            "y": -31,
+            "z": -2,
+            "axis": "Z"
+          }
+        },
+        {
+          "id": "hole--57-31",
+          "type": "hole",
+          "name": "Mounting hole · Ø9",
+          "params": {
+            "radius": 4.5,
+            "depth": 16,
+            "x": -57,
+            "y": 31,
+            "z": -2,
+            "axis": "Z"
+          }
+        },
+        {
+          "id": "hole-57--31",
+          "type": "hole",
+          "name": "Mounting hole · Ø9",
+          "params": {
+            "radius": 4.5,
+            "depth": 16,
+            "x": 57,
+            "y": -31,
+            "z": -2,
+            "axis": "Z"
+          }
+        },
+        {
+          "id": "hole-57-31",
+          "type": "hole",
+          "name": "Mounting hole · Ø9",
+          "params": {
+            "radius": 4.5,
+            "depth": 16,
+            "x": 57,
+            "y": 31,
+            "z": -2,
+            "axis": "Z"
+          }
+        }
+      ],
+      "explode": [
+        0,
+        0,
+        -22
+      ]
+    },
+    {
+      "id": "4f023a58-c821-455d-9224-535dbeedfeec",
+      "name": "Bearing housing",
+      "kind": "extrude",
+      "params": {
+        "points": [
+          [
+            -37,
+            0
+          ],
+          [
+            37,
+            0
+          ],
+          [
+            37,
+            40
+          ],
+          [
+            36.88594134812573,
+            42.90298654193026
+          ],
+          [
+            36.544468602020096,
+            45.78807520648854
+          ],
+          [
+            35.97768705471403,
+            48.6374784626685
+          ],
+          [
+            35.18909110292068,
+            51.433628791873055
+          ],
+          [
+            34.183542702917606,
+            54.15928699750832
+          ],
+          [
+            32.96724139496961,
+            56.79764849036323
+          ],
+          [
+            31.547686081101414,
+            59.332446894490104
+          ],
+          [
+            29.933628791873055,
+            61.748054334821504
+          ],
+          [
+            28.135020727201145,
+            64.0295777882168
+          ],
+          [
+            26.16295090390226,
+            66.16295090390226
+          ],
+          [
+            24.0295777882168,
+            68.13502072720114
+          ],
+          [
+            21.748054334821507,
+            69.93362879187305
+          ],
+          [
+            19.33244689449011,
+            71.5476860811014
+          ],
+          [
+            16.797648490363233,
+            72.9672413949696
+          ],
+          [
+            14.159286997508325,
+            74.1835427029176
+          ],
+          [
+            11.433628791873055,
+            75.18909110292068
+          ],
+          [
+            8.637478462668502,
+            75.97768705471404
+          ],
+          [
+            5.788075206488545,
+            76.54446860202009
+          ],
+          [
+            2.902986541930265,
+            76.88594134812573
+          ],
+          [
+            2.2655965784226034e-15,
+            77
+          ],
+          [
+            -2.9029865419302605,
+            76.88594134812573
+          ],
+          [
+            -5.788075206488532,
+            76.54446860202009
+          ],
+          [
+            -8.637478462668497,
+            75.97768705471404
+          ],
+          [
+            -11.433628791873051,
+            75.18909110292068
+          ],
+          [
+            -14.15928699750832,
+            74.1835427029176
+          ],
+          [
+            -16.79764849036323,
+            72.96724139496962
+          ],
+          [
+            -19.332446894490104,
+            71.54768608110142
+          ],
+          [
+            -21.748054334821504,
+            69.93362879187305
+          ],
+          [
+            -24.02957778821679,
+            68.13502072720115
+          ],
+          [
+            -26.162950903902257,
+            66.16295090390226
+          ],
+          [
+            -28.13502072720114,
+            64.0295777882168
+          ],
+          [
+            -29.93362879187305,
+            61.74805433482151
+          ],
+          [
+            -31.54768608110141,
+            59.33244689449011
+          ],
+          [
+            -32.967241394969605,
+            56.79764849036323
+          ],
+          [
+            -34.183542702917606,
+            54.159286997508325
+          ],
+          [
+            -35.18909110292068,
+            51.43362879187306
+          ],
+          [
+            -35.97768705471403,
+            48.637478462668504
+          ],
+          [
+            -36.544468602020096,
+            45.78807520648854
+          ],
+          [
+            -36.88594134812573,
+            42.90298654193027
+          ],
+          [
+            -37,
+            40.00000000000001
+          ],
+          [
+            -37,
+            0
+          ]
+        ],
+        "height": 28
+      },
+      "position": [
+        0,
+        14,
+        12
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#347893",
+      "material": "blue",
+      "features": [
+        {
+          "id": "bearing-bore",
+          "type": "hole",
+          "name": "Bearing seat · Ø44",
+          "params": {
+            "radius": 22,
+            "depth": 32,
+            "x": 0,
+            "y": 40,
+            "z": -2,
+            "axis": "Z"
+          }
+        }
+      ],
+      "explode": [
+        0,
+        0,
+        42
+      ]
+    },
+    {
+      "id": "5613228f-63aa-4116-b0bc-e47d72a4d156",
+      "name": "Bronze bearing sleeve",
+      "kind": "tube",
+      "params": {
+        "radius": 21.85,
+        "innerRadius": 14,
+        "height": 31
+      },
+      "position": [
+        0,
+        15.5,
+        52
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#c5a366",
+      "material": "brass",
+      "features": [],
+      "explode": [
+        0,
+        -44,
+        42
+      ]
+    },
+    {
+      "id": "275853fa-b56c-429c-a7fb-5b955d7efeff",
+      "name": "Bearing flange",
+      "kind": "tube",
+      "params": {
+        "radius": 25,
+        "innerRadius": 14,
+        "height": 3.2
+      },
+      "position": [
+        0,
+        -14,
+        52
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#c5a366",
+      "material": "brass",
+      "features": [],
+      "explode": [
+        0,
+        -48,
+        42
+      ]
+    },
+    {
+      "id": "f0c148ce-cea2-4763-9d55-7ae40fe71486",
+      "name": "Precision shaft · Ø27.2",
+      "kind": "cylinder",
+      "params": {
+        "radius": 13.6,
+        "height": 106,
+        "bevel": 1.2
+      },
+      "position": [
+        0,
+        51,
+        52
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#a6b3bc",
+      "material": "steel",
+      "features": [],
+      "explode": [
+        0,
+        -95,
+        42
+      ]
+    },
+    {
+      "id": "d3cf09bf-b8c6-4542-b3ef-bf10b3ae116b",
+      "name": "Shaft collar",
+      "kind": "tube",
+      "params": {
+        "radius": 19,
+        "innerRadius": 13.6,
+        "height": 12
+      },
+      "position": [
+        0,
+        42,
+        52
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#4b565e",
+      "material": "black",
+      "features": [],
+      "explode": [
+        0,
+        51,
+        42
+      ]
+    },
+    {
+      "id": "5553d23e-e0a0-4a5b-9ab9-f835e077f0c8",
+      "name": "Washer M8 · LF",
+      "kind": "tube",
+      "params": {
+        "radius": 8.5,
+        "innerRadius": 4.5,
+        "height": 1.6
+      },
+      "position": [
+        -57,
+        -31,
+        12
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#a6b3bc",
+      "material": "steel",
+      "features": [],
+      "explode": [
+        -5.7,
+        -3.1,
+        28
+      ]
+    },
+    {
+      "id": "1ebbe4ba-c083-41f2-ad0b-689e57c8eb76",
+      "name": "Socket screw M8 · LF",
+      "kind": "cylinder",
+      "params": {
+        "radius": 6.5,
+        "height": 8,
+        "bevel": 0.7,
+        "segments": 64
+      },
+      "position": [
+        -57,
+        -31,
+        13.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#4b565e",
+      "material": "black",
+      "features": [
+        {
+          "id": "socket",
+          "type": "hole",
+          "name": "Hex socket · 6 mm",
+          "params": {
+            "radius": 3.45,
+            "depth": 6,
+            "x": 0,
+            "y": 0,
+            "z": 3,
+            "axis": "Z",
+            "segments": 6
+          }
+        }
+      ],
+      "explode": [
+        -5.7,
+        -3.1,
+        56
+      ]
+    },
+    {
+      "id": "1d56f311-de75-4ed3-8a56-68ee0ba064bf",
+      "name": "Washer M8 · LB",
+      "kind": "tube",
+      "params": {
+        "radius": 8.5,
+        "innerRadius": 4.5,
+        "height": 1.6
+      },
+      "position": [
+        -57,
+        31,
+        12
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#a6b3bc",
+      "material": "steel",
+      "features": [],
+      "explode": [
+        -5.7,
+        3.1,
+        28
+      ]
+    },
+    {
+      "id": "a405f3f9-126b-4d58-860e-f2939c3957b8",
+      "name": "Socket screw M8 · LB",
+      "kind": "cylinder",
+      "params": {
+        "radius": 6.5,
+        "height": 8,
+        "bevel": 0.7,
+        "segments": 64
+      },
+      "position": [
+        -57,
+        31,
+        13.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#4b565e",
+      "material": "black",
+      "features": [
+        {
+          "id": "socket",
+          "type": "hole",
+          "name": "Hex socket · 6 mm",
+          "params": {
+            "radius": 3.45,
+            "depth": 6,
+            "x": 0,
+            "y": 0,
+            "z": 3,
+            "axis": "Z",
+            "segments": 6
+          }
+        }
+      ],
+      "explode": [
+        -5.7,
+        3.1,
+        56
+      ]
+    },
+    {
+      "id": "56d74fa9-23e5-4e4b-a067-a033b9db6d9b",
+      "name": "Washer M8 · RF",
+      "kind": "tube",
+      "params": {
+        "radius": 8.5,
+        "innerRadius": 4.5,
+        "height": 1.6
+      },
+      "position": [
+        57,
+        -31,
+        12
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#a6b3bc",
+      "material": "steel",
+      "features": [],
+      "explode": [
+        5.7,
+        -3.1,
+        28
+      ]
+    },
+    {
+      "id": "fb2ed875-0b14-4021-8a58-569701f33e8f",
+      "name": "Socket screw M8 · RF",
+      "kind": "cylinder",
+      "params": {
+        "radius": 6.5,
+        "height": 8,
+        "bevel": 0.7,
+        "segments": 64
+      },
+      "position": [
+        57,
+        -31,
+        13.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#4b565e",
+      "material": "black",
+      "features": [
+        {
+          "id": "socket",
+          "type": "hole",
+          "name": "Hex socket · 6 mm",
+          "params": {
+            "radius": 3.45,
+            "depth": 6,
+            "x": 0,
+            "y": 0,
+            "z": 3,
+            "axis": "Z",
+            "segments": 6
+          }
+        }
+      ],
+      "explode": [
+        5.7,
+        -3.1,
+        56
+      ]
+    },
+    {
+      "id": "0e7d90fb-252c-49cb-a8ec-856235213832",
+      "name": "Washer M8 · RB",
+      "kind": "tube",
+      "params": {
+        "radius": 8.5,
+        "innerRadius": 4.5,
+        "height": 1.6
+      },
+      "position": [
+        57,
+        31,
+        12
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#a6b3bc",
+      "material": "steel",
+      "features": [],
+      "explode": [
+        5.7,
+        3.1,
+        28
+      ]
+    },
+    {
+      "id": "0d89471e-ad49-4ec0-b4b9-6f1ef7407bba",
+      "name": "Socket screw M8 · RB",
+      "kind": "cylinder",
+      "params": {
+        "radius": 6.5,
+        "height": 8,
+        "bevel": 0.7,
+        "segments": 64
+      },
+      "position": [
+        57,
+        31,
+        13.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#4b565e",
+      "material": "black",
+      "features": [
+        {
+          "id": "socket",
+          "type": "hole",
+          "name": "Hex socket · 6 mm",
+          "params": {
+            "radius": 3.45,
+            "depth": 6,
+            "x": 0,
+            "y": 0,
+            "z": 3,
+            "axis": "Z",
+            "segments": 6
+          }
+        }
+      ],
+      "explode": [
+        5.7,
+        3.1,
+        56
+      ]
+    }
+  ],
+  "sketches": [
+    {
+      "id": "mounting-footprint",
+      "name": "Plate footprint",
+      "plane": "XY",
+      "points": [
+        [
+          -74,
+          -48
+        ],
+        [
+          74,
+          -48
+        ],
+        [
+          74,
+          48
+        ],
+        [
+          -74,
+          48
+        ]
+      ],
+      "closed": true,
+      "visible": false
+    }
+  ]
+}

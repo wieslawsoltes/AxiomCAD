@@ -1,0 +1,16 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+const src=async name=>readFile(new URL('src/'+name,import.meta.url),'utf8');
+const strip=s=>s.replace(/^import .*?;\s*$/gm,'').replace(/\bexport\s+(?=(?:const|let|function|class)\b)/g,'');
+const geometry=strip(await src('geometry.js'));
+const worker=geometry+'\n'+strip(await src('geometry-worker.js'));
+const names=['math.js','geometry.js','renderer.js','samples.js','icons.js','io.js','app.js'];
+let script='globalThis.AXIOM_WORKER_SOURCE='+JSON.stringify(worker)+';\n(()=>{\n';
+for(const n of names)script+='\n/* '+n+' */\n'+strip(await src(n));
+script+='\n})();';
+script=script.replace(/new URL\(['"]\.\/geometry-worker\.js['"],\s*import\.meta\.url\)/g,"'geometry-worker.js'");
+let html=await readFile(new URL('index.html',import.meta.url),'utf8');
+const css=await readFile(new URL('styles.css',import.meta.url),'utf8');
+html=html.replace('<link rel="stylesheet" href="styles.css">',()=>'<style>\n'+css+'\n</style>').replace('<script type="module" src="src/app.js"></script>',()=>'<script>\n'+script.replace(/<\/script/gi,'<\\/script')+'\n</script>');
+await mkdir(new URL('dist/',import.meta.url),{recursive:true});
+await writeFile(new URL('dist/axiom-cad.html',import.meta.url),html);
+console.log('Built self-contained dist/axiom-cad.html ('+Math.round(Buffer.byteLength(html)/1024)+' KiB).');

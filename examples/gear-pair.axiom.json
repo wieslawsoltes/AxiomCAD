@@ -1,0 +1,182 @@
+{
+  "schema": "axiom-cad",
+  "version": 1,
+  "name": "Spur gear pair",
+  "units": "mm",
+  "bodies": [
+    {
+      "id": "e988ff13-7a71-43b3-8555-63718678178f",
+      "name": "Drive gear · 24 teeth",
+      "kind": "gear",
+      "params": {
+        "radius": 48,
+        "height": 12,
+        "teeth": 24,
+        "bore": 9
+      },
+      "position": [
+        -31,
+        0,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#c5a366",
+      "material": "brass",
+      "features": [],
+      "explode": [
+        -15,
+        0,
+        30
+      ]
+    },
+    {
+      "id": "50cad6b4-aff4-45d9-ba6c-e2623e37f791",
+      "name": "Pinion · 14 teeth",
+      "kind": "gear",
+      "params": {
+        "radius": 28,
+        "height": 12,
+        "teeth": 14,
+        "bore": 7
+      },
+      "position": [
+        41,
+        0,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        12.857142857142858
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#a6b3bc",
+      "material": "steel",
+      "features": [],
+      "explode": [
+        15,
+        0,
+        30
+      ]
+    },
+    {
+      "id": "e049ad81-7ac9-4d26-8ed5-cd9ab3fd4317",
+      "name": "Gear plate",
+      "kind": "box",
+      "params": {
+        "width": 168,
+        "depth": 120,
+        "height": 8,
+        "radius": 10
+      },
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#347893",
+      "material": "blue",
+      "features": [],
+      "explode": [
+        0,
+        0,
+        -20
+      ]
+    },
+    {
+      "id": "5ea79e97-8fd5-49ab-bc4c-a6ea0c4b3e3f",
+      "name": "Gear axle",
+      "kind": "cylinder",
+      "params": {
+        "radius": 8.8,
+        "height": 32,
+        "bevel": 0.8
+      },
+      "position": [
+        -31,
+        0,
+        8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#4b565e",
+      "material": "black",
+      "features": [],
+      "explode": [
+        0,
+        0,
+        55
+      ]
+    },
+    {
+      "id": "47e03261-88ee-4f12-954f-230c10dcb255",
+      "name": "Gear axle",
+      "kind": "cylinder",
+      "params": {
+        "radius": 6.8,
+        "height": 32,
+        "bevel": 0.8
+      },
+      "position": [
+        41,
+        0,
+        8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "visible": true,
+      "color": "#4b565e",
+      "material": "black",
+      "features": [],
+      "explode": [
+        0,
+        0,
+        55
+      ]
+    }
+  ],
+  "sketches": []
+}

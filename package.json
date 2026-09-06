@@ -1,0 +1,17 @@
+{
+  "name": "axiom-cad",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Framework-free, local-first mesh CAD workbench with native WebGPU rendering",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "start": "node serve.mjs",
+    "test:browser": "python3 tests/browser.py --url http://localhost:8080"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}

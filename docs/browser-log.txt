@@ -1,0 +1,41 @@
+PASS sample builds 14 real bodies
+PASS renderer sleeps without an idle animation loop
+PASS inspector edits rebuild a solid
+PASS Undo restores geometric volume
+PASS Redo restores edited parameter
+PASS invalid dimension is rejected
+PASS material selection updates the document and GPU batch
+PASS ribbon primitive dialog creates real geometry
+PASS hole dialog cuts actual material
+PASS hole is retained as an editable feature
+PASS ray picking selects the rendered body
+PASS pointer drag moves the body in model space
+PASS surface picking measures two points
+PASS measurement result is a finite nonzero distance
+PASS section generates actual triangle-plane contours
+PASS exploded view changes GPU instance positions only
+PASS wireframe changes the rendering mode
+PASS dark theme switches the UI
+PASS perspective projection is active
+PASS rectangle pointer tool creates a closed sketch
+PASS sketch extrusion produces nonempty geometry
+PASS sketch dimensions regenerate linked extrusion
+PASS deleting a sketch freezes its latest profile in the extrusion
+PASS Undo restores sketch association
+PASS Boolean union generates the expected volume
+PASS Boolean operands are retained but hidden
+PASS Boolean undo restores operands
+PASS linear pattern produces independent bodies
+PASS circular pattern produces independent bodies
+PASS mirror changes geometry across the selected plane
+PASS isolation changes renderable body visibility
+PASS show all restores hidden bodies
+PASS SVG export creates a valid three-view document
+PASS PNG capture contains an actual raster payload
+PASS native JSON reload retains geometry
+PASS OBJ import applies the selected source units
+PASS command palette filters real commands
+PASS command palette dispatches a modeling dialog
+PASS workspace fits a smaller desktop viewport
+PASS no uncaught JavaScript errors
+40 integration checks passed.

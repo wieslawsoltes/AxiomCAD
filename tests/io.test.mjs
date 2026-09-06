@@ -1,0 +1,16 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {K} from '../src/geometry.js';
+import {newBody,bearingSample,blankDocument} from '../src/samples.js';
+import {validateDocument,validateShapeParameters,parseSTL,parseOBJ,binarySTL,writeOBJ} from '../src/io.js';
+const box=newBody('box',{width:10,depth:20,height:30,radius:0}),mesh={id:box.id,...K.packed(K.buildBody(box))};
+test('native document serialization preserves editable parameters and features',()=>{const original=bearingSample(),copy=validateDocument(JSON.parse(JSON.stringify(original)));assert.deepEqual(copy,validateDocument(original));assert.deepEqual(copy.bodies.map(b=>b.params),original.bodies.map(b=>b.params));assert.deepEqual(copy.sketches.map(s=>s.points),original.sketches.map(s=>s.points));});
+test('unsupported schema, duplicate ids and non-finite coordinates are rejected',()=>{assert.throws(()=>validateDocument({}));let d=blankDocument();d.bodies=[box,box];assert.throws(()=>validateDocument(d));d.bodies=[structuredClone(box)];d.bodies[0].position[0]=Infinity;assert.throws(()=>validateDocument(d));});
+test('invalid radii, segment counts, scales and profiles are rejected',()=>{assert.throws(()=>validateShapeParameters('tube',{radius:2,innerRadius:3,height:10}));assert.throws(()=>validateShapeParameters('cylinder',{radius:2,height:10,segments:3}));assert.throws(()=>validateShapeParameters('extrude',{points:[[0,0],[1,0],[2,0]],height:1}));const d=blankDocument();d.bodies=[structuredClone(box)];d.bodies[0].scale=[0,1,1];assert.throws(()=>validateDocument(d));});
+test('binary STL has the correct layout and round-trips volume',()=>{const buffer=binarySTL([mesh]);assert.equal(buffer.byteLength,84+50*mesh.triangleCount);assert.equal(new DataView(buffer).getUint32(80,true),12);const v=parseSTL(buffer);assert.equal(v.length,108);assert.equal(K.packed(K.shape('mesh',{vertices:v})).volume,6000);});
+test('ASCII STL imports facet vertices',()=>{const s='solid test\nfacet normal 0 0 1\nouter loop\nvertex 0 0 0\nvertex 1 0 0\nvertex 0 1 0\nendloop\nendfacet\nendsolid';assert.deepEqual(parseSTL(new TextEncoder().encode(s).buffer),[0,0,0,1,0,0,0,1,0]);});
+test('malformed STL and invalid OBJ indices reject',()=>{assert.throws(()=>parseSTL(new Uint8Array([1,2,3]).buffer));assert.throws(()=>parseOBJ('v 0 0 0\nf 1 2 3'));});
+test('OBJ export/import round-trips normals, winding and volume',()=>{const v=parseOBJ(writeOBJ([mesh],[box]));assert.equal(v.length,108);assert.equal(K.packed(K.shape('mesh',{vertices:v})).volume,6000);});
+test('OBJ supports negative indices and concave n-gons',()=>{const source='v 0 0 0\nv 4 0 0\nv 4 1 0\nv 1 1 0\nv 1 4 0\nv 0 4 0\nf -6 -5 -4 -3 -2 -1';const out=parseOBJ(source);assert.equal(out.length/9,4);assert.equal(K.packed(K.shape('mesh',{vertices:out})).area,7);});
+test('export rejects empty input',()=>assert.throws(()=>binarySTL([])));
+test('OBJ n-gon projection tolerates collinear leading vertices',()=>{const source='v 0 0 0\nv 1 0 0\nv 2 0 0\nv 2 2 0\nv 0 2 0\nf 1 2 3 4 5';assert.equal(K.packed(K.shape('mesh',{vertices:parseOBJ(source)})).area,4);});

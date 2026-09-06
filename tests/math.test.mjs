@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {V,M,Camera,rayTriangle,rayBounds} from '../src/math.js';
+const near=(a,b,t=.001)=>assert.ok(Math.abs(a-b)<t,`${a} vs ${b}`);
+test('matrix inverse: both left and right identity',()=>{const c=new Camera();for(const m of [c.view,c.proj,c.vp]){for(const product of [M.mul(m,M.invert(m)),M.mul(M.invert(m),m)])product.forEach((v,i)=>near(v,i%5===0?1:0));}});
+test('singular inverse is rejected',()=>assert.throws(()=>M.invert(new Float32Array(16))));
+test('orthographic and perspective rays round-trip projected world points',()=>{for(const perspective of [false,true]){const c=new Camera();c.width=1200;c.height=800;c.perspective=perspective;c.update();for(const p of [[0,0,0],[24,-20,30],[-40,40,-4]]){const s=c.project(p),r=c.ray(s[0],s[1]);near(V.len(V.cross(V.sub(p,r.o),r.d)),0,.02);}}});
+test('zoom remains anchored under the cursor',()=>{for(const perspective of [false,true]){const c=new Camera();c.width=1200;c.height=800;c.perspective=perspective;c.update();const n=V.norm(V.sub(c.eye,c.target)),point=c.onPlane(240,620,c.target,n);c.zoom(-200,240,620);const p=c.project(point);near(p[0],240,.2);near(p[1],620,.2);}});
+test('triangle picking handles both winding orders and misses',()=>{const a=[0,0,0],b=[10,0,0],c=[0,10,0],o=[2,2,10],d=[0,0,-1];near(rayTriangle(o,d,a,b,c).t,10);near(rayTriangle(o,d,a,c,b).t,10);assert.equal(rayTriangle([20,20,10],d,a,b,c),null);});
+test('parallel-ray AABB rejection',()=>{const b={min:[-1,-1,-1],max:[1,1,1]};assert.equal(rayBounds([0,0,5],[0,0,-1],b),true);assert.equal(rayBounds([5,0,5],[0,0,-1],b),false);assert.equal(rayBounds([0,0,-5],[0,0,-1],b),false);});
