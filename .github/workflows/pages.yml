@@ -1,0 +1,124 @@
+name: Test and deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Test and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run unit tests
+        shell: bash
+        run: npm test | tee docs/unit-test-results.txt
+      - name: Build standalone app
+        run: npm run build
+      - name: Install browser test tooling
+        run: |
+          python3 -m pip install playwright==1.55.0
+          python3 -m playwright install --with-deps chromium
+      - name: Test the production bundle in Chromium
+        shell: bash
+        run: |
+          CHROMIUM="$(python3 -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          node serve.mjs > /tmp/axiom-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          for attempt in $(seq 1 40); do
+            curl --fail --silent http://127.0.0.1:8080/ > /dev/null && break
+            sleep 0.25
+          done
+          python3 tests/browser.py --url http://127.0.0.1:8080/dist/axiom-cad.html --chromium "$CHROMIUM" | tee docs/browser-log.txt
+      - name: Retain test results and rendered previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-${{ github.run_id }}
+          path: |
+            docs/unit-test-results.txt
+            docs/browser-test-results.json
+            docs/browser-log.txt
+            docs/preview.png
+            docs/preview-dark.png
+          retention-days: 14
+      - name: Assemble GitHub Pages site
+        shell: bash
+        run: |
+          mkdir -p _site
+          cp dist/axiom-cad.html _site/index.html
+          cp dist/axiom-cad.html _site/axiom-cad.html
+          cp -R examples _site/examples
+          touch _site/.nojekyll
+          node --input-type=module <<'JS'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { createHash } from 'node:crypto';
+          const version = {
+            application: 'Axiom CAD',
+            commit: process.env.GITHUB_SHA,
+            run: process.env.GITHUB_RUN_ID,
+            builtAt: new Date().toISOString(),
+            sha256: createHash('sha256').update(readFileSync('_site/index.html')).digest('hex')
+          };
+          writeFileSync('_site/version.json', JSON.stringify(version, null, 2) + '\n');
+          JS
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy and verify
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Verify the public deployment and bundle checksum
+        shell: bash
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          BASE="${PAGE_URL%/}"
+          for attempt in $(seq 1 12); do
+            if curl --fail --silent --show-error --max-time 20 "${BASE}/version.json?commit=${GITHUB_SHA}" -o /tmp/version.json && jq -e --arg sha "$GITHUB_SHA" '.commit == $sha' /tmp/version.json > /dev/null; then
+              curl --fail --silent --show-error --retry 3 --max-time 30 "${BASE}/?commit=${GITHUB_SHA}" -o /tmp/axiom.html
+              EXPECTED="$(jq -r .sha256 /tmp/version.json)"
+              printf '%s  /tmp/axiom.html\n' "$EXPECTED" | sha256sum --check
+              printf '### Axiom CAD is live\n\n%s\n\nVerified commit: `%s`\n' "$PAGE_URL" "$GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo 'Public deployment did not match this commit.' >&2
+          exit 1
