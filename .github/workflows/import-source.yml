@@ -22,6 +22,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Verify and unpack original source
         shell: python
         run: |
@@ -44,9 +47,18 @@ jobs:
               target.write_text(content, encoding='utf-8', newline='')
           print(f'Imported {len(files)} original source files with SHA-256 verification.')
       - name: Test geometry, IO, build and server
-        run: npm test
-      - name: Build standalone distribution
-        run: npm run build
+        shell: bash
+        run: npm test | tee docs/unit-test-results.txt
+      - name: Build standalone distribution and sample STL
+        run: |
+          npm run build
+          node --input-type=module <<'JS'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { K } from './src/geometry.js';
+          import { binarySTL } from './src/io.js';
+          const document = JSON.parse(readFileSync('examples/bearing-support.axiom.json', 'utf8'));
+          writeFileSync('examples/bearing-support.stl', Buffer.from(binarySTL(K.buildScene(document.bodies))));
+          JS
       - name: Install browser test tooling
         run: |
           python3 -m pip install playwright==1.55.0
@@ -62,7 +74,7 @@ jobs:
             curl --fail --silent http://127.0.0.1:8080/ > /dev/null && break
             sleep 0.25
           done
-          python3 tests/browser.py --url http://127.0.0.1:8080 --chromium "$CHROMIUM"
+          python3 tests/browser.py --url http://127.0.0.1:8080 --chromium "$CHROMIUM" | tee docs/browser-log.txt
       - name: Commit readable source, tests, examples and previews
         shell: bash
         run: |
