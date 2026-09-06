@@ -1,0 +1,73 @@
+name: Import Axiom CAD source
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/import/manifest.json']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: axiom-source-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify and unpack original source
+        shell: python
+        run: |
+          import base64, hashlib, json, lzma, pathlib
+          root = pathlib.Path.cwd()
+          directory = root / '.github/import'
+          manifest = json.loads((directory / 'manifest.json').read_text())
+          encoded = ''.join((directory / name).read_text().strip() for name in manifest['parts'])
+          packed = base64.b64decode(encoded, validate=True)
+          assert hashlib.sha256(packed).hexdigest() == manifest['sha256'], 'Source integrity check failed'
+          files = json.loads(lzma.decompress(packed))
+          assert len(files) == manifest['files'], 'Unexpected source file count'
+          for name, content in files.items():
+              relative = pathlib.PurePosixPath(name)
+              assert not relative.is_absolute() and '..' not in relative.parts
+              assert '.git' not in relative.parts and '.github' not in relative.parts
+              target = root / relative
+              assert not target.exists(), f'Refusing to overwrite {name}'
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_text(content, encoding='utf-8', newline='')
+          print(f'Imported {len(files)} original source files with SHA-256 verification.')
+      - name: Test geometry, IO, build and server
+        run: npm test
+      - name: Build standalone distribution
+        run: npm run build
+      - name: Install browser test tooling
+        run: |
+          python3 -m pip install playwright==1.55.0
+          python3 -m playwright install --with-deps chromium
+      - name: Validate browser and generate previews
+        shell: bash
+        run: |
+          CHROMIUM="$(python3 -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          node serve.mjs > /tmp/axiom-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          for attempt in $(seq 1 40); do
+            curl --fail --silent http://127.0.0.1:8080/ > /dev/null && break
+            sleep 0.25
+          done
+          python3 tests/browser.py --url http://127.0.0.1:8080 --chromium "$CHROMIUM"
+      - name: Commit readable source, tests, examples and previews
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .gitignore LICENSE README.md build.mjs serve.mjs package.json index.html styles.css src tests examples docs dist
+          git commit -m "feat: add Axiom CAD WebGPU workbench, modeling kernel, tests and documentation"
+          git push origin HEAD:main
