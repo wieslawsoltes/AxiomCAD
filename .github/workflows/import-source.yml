@@ -3,7 +3,7 @@ name: Import Axiom CAD source
 on:
   push:
     branches: [main]
-    paths: ['.github/import/manifest.json']
+    paths: ['.github/import/manifest.json', '.github/workflows/import-source.yml']
   workflow_dispatch:
 
 permissions:
@@ -46,6 +46,29 @@ jobs:
               target.parent.mkdir(parents=True, exist_ok=True)
               target.write_text(content, encoding='utf-8', newline='')
           print(f'Imported {len(files)} original source files with SHA-256 verification.')
+      - name: Make test polling compatible with the existing CSP
+        shell: python
+        run: |
+          from pathlib import Path
+          path = Path('tests/browser.py')
+          source = path.read_text()
+          helper = '''def wait_until(page, expression, timeout=15000):
+           # Poll through the automation protocol; do not relax the application's CSP.
+           deadline = time.monotonic() + timeout / 1000
+           while time.monotonic() < deadline:
+            if page.evaluate(expression):
+             return
+            time.sleep(0.05)
+           raise TimeoutError(f'Browser condition did not become true: {expression}')
+          reports=[];errors=[]'''
+          assert source.count('page.wait_for_function(') == 2
+          source = source.replace('reports=[];errors=[]', helper)
+          source = source.replace('page.wait_for_function(', 'wait_until(page,')
+          path.write_text(source)
+          readme = Path('README.md')
+          text = readme.read_text()
+          heading, rest = text.split('\n', 1)
+          readme.write_text(heading + '\n\n**[Launch Axiom CAD](https://wieslawsoltes.github.io/AxiomCAD/)** · [Deployment documentation](docs/DEPLOYMENT.md)\n' + rest)
       - name: Test geometry, IO, build and server
         shell: bash
         run: npm test | tee docs/unit-test-results.txt
